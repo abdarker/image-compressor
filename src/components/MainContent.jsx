@@ -1,39 +1,44 @@
 import { ImgComparisonSlider } from "@img-comparison-slider/react";
 import Compressor from "compressorjs";
+import JSZip from "jszip";
 import React, { useState } from "react";
-const MainContent = () => {
-  const [originalImage, setOriginalImage] = useState(null);
-  const [compressedImage, setCompressedImage] = useState(null);
-  const [compressionRate, setCompressionRate] = useState(null);
-  const [uploadedFileName, setUploadedFileName] = useState("");
-  const [isDragActive, setIsDragActive] = useState(false);
-  const [originalFileSize, setOriginalFileSize] = useState(null);
-  const [compressedFileSize, setCompressedFileSize] = useState(null);
 
-  const handleImageDrop = (e) => {
+const MainContent = () => {
+  const [compressedImages, setCompressedImages] = useState([]);
+  const [zipFile, setZipFile] = useState(null);
+  const [isDragActive, setIsDragActive] = useState(false);
+
+  const handleImageDrop = async (e) => {
     e.preventDefault();
     setIsDragActive(false);
-    const file = e.dataTransfer.files[0];
-    handleImage(file);
+    const files = Array.from(e.dataTransfer.files);
+    await handleImages(files);
   };
 
-  const handleImageUpload = (e) => {
+  const handleImageUpload = async (e) => {
     e.preventDefault();
-    const file = e.target.files[0];
-    handleImage(file);
+    const files = Array.from(e.target.files);
+    await handleImages(files);
   };
 
-  const handleImage = (file) => {
-    if (file) {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
+  const handleImages = async (files) => {
+    const compressedImgs = [];
+    const zip = new JSZip();
+    const img = zip.folder("compressed_images");
+    for (const file of files) {
+      const compressedImg = await compressImage(file);
+      compressedImgs.push(compressedImg);
+      const response = await fetch(compressedImg);
+      const blob = await response.blob();
+      img.file(`compressed_${file.name}`, blob);
+    }
+    const zipBlob = await zip.generateAsync({ type: "blob" });
+    setZipFile(zipBlob);
+    setCompressedImages(compressedImgs);
+  };
 
-      reader.onload = () => {
-        setOriginalImage(reader.result);
-        const fileName = file.name;
-        setUploadedFileName(fileName);
-      };
-
+  const compressImage = (file) => {
+    return new Promise((resolve, reject) => {
       new Compressor(file, {
         maxWidth: undefined,
         maxHeight: undefined,
@@ -47,27 +52,20 @@ const MainContent = () => {
           const reader = new FileReader();
           reader.readAsDataURL(result);
           reader.onload = () => {
-            setCompressedImage(reader.result);
-
-            // Calculate compression rate
-            const originalSize = file.size;
-            setOriginalFileSize(originalSize);
-            const compressedSize = result.size;
-            setCompressedFileSize(compressedSize);
-            const rate = ((originalSize - compressedSize) / originalSize) * 100;
-            setCompressionRate(rate.toFixed(2));
+            resolve(reader.result);
           };
         },
         error(err) {
-          console.error("Compression failed:", err);
+          reject(err);
         },
       });
-    }
+    });
   };
 
   const handleDragOver = (e) => {
     e.preventDefault();
   };
+
   const handleDragEnter = () => {
     setIsDragActive(true);
   };
@@ -77,10 +75,12 @@ const MainContent = () => {
   };
 
   const handleDownload = () => {
-    const downloadLink = document.createElement("a");
-    downloadLink.href = compressedImage;
-    downloadLink.download = `compressed_${uploadedFileName}`;
-    downloadLink.click();
+    if (zipFile) {
+      const downloadLink = document.createElement("a");
+      downloadLink.href = URL.createObjectURL(zipFile);
+      downloadLink.download = "compressed_images.zip";
+      downloadLink.click();
+    }
   };
 
   return (
@@ -93,6 +93,7 @@ const MainContent = () => {
         onDragEnter={handleDragEnter}
         onDragLeave={handleDragLeave}
       >
+        {/* Your drop area content */}
         <p
           className={`text-sm ${
             isDragActive ? "text-sky-800" : "text-gray-400"
@@ -103,6 +104,7 @@ const MainContent = () => {
             : "Drag and drop your files here"}
         </p>
         <input
+          multiple
           type="file"
           accept="image/*"
           onChange={handleImageUpload}
@@ -111,30 +113,24 @@ const MainContent = () => {
         />
         <label htmlFor="file-input">Select Image</label>
       </div>
+      {/* Display compressed images */}
       <div>
-        {originalImage && (
-          <div>
-            <h3>Original Image:</h3>
-            <img src={originalImage} alt="Original" width="300" />
-            <p>File Name: {uploadedFileName}</p>
-            <p>File Size: {(originalFileSize / 1024).toFixed(2)} KB</p>
+        {compressedImages?.map((image, index) => (
+          <div key={index}>
+            <img src={image} alt={`Compressed-${index}`} width="300" />
           </div>
-        )}
-        {compressedImage && (
-          <div>
-            <h3>Compressed Image:</h3>
-            <img src={compressedImage} alt="Compressed" width="300" />
-            <p>Compressed File Name: compressed_{uploadedFileName}</p>
-            <p>File Size: {(compressedFileSize / 1024).toFixed(2)} KB</p>
-            <p>Compression Rate: {compressionRate}%</p>
-            <button onClick={handleDownload}>Download Compressed Image</button>
-          </div>
-        )}
+        ))}
       </div>
+      {/* Button to download the zip file */}
+      <div>
+        <button onClick={handleDownload}>
+          Download Compressed Images (ZIP)
+        </button>
+      </div>
+      {/* Image comparison slider */}
       <div>
         <ImgComparisonSlider>
-          <img slot="first" src={originalImage} width="100%" />
-          <img slot="second" src={compressedImage} width="100%" />
+          {/* You can add your original and compressed images here */}
         </ImgComparisonSlider>
       </div>
     </div>
