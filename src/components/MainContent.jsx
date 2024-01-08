@@ -1,3 +1,4 @@
+import { ImgComparisonSlider } from "@img-comparison-slider/react";
 import Compressor from "compressorjs";
 import React, { useState } from "react";
 const MainContent = () => {
@@ -6,6 +7,9 @@ const MainContent = () => {
   const [compressionRate, setCompressionRate] = useState(null);
   const [uploadedFileName, setUploadedFileName] = useState("");
   const [isDragActive, setIsDragActive] = useState(false);
+  const [originalFileSize, setOriginalFileSize] = useState(null);
+  const [compressedFileSize, setCompressedFileSize] = useState(null);
+
   const handleImageDrop = (e) => {
     e.preventDefault();
     setIsDragActive(false);
@@ -37,7 +41,7 @@ const MainContent = () => {
         minHeight: 0,
         width: undefined,
         height: undefined,
-        quality: 0.6,
+        quality: 0.8,
 
         success(result) {
           const reader = new FileReader();
@@ -47,7 +51,9 @@ const MainContent = () => {
 
             // Calculate compression rate
             const originalSize = file.size;
+            setOriginalFileSize(originalSize);
             const compressedSize = result.size;
+            setCompressedFileSize(compressedSize);
             const rate = ((originalSize - compressedSize) / originalSize) * 100;
             setCompressionRate(rate.toFixed(2));
           };
@@ -70,9 +76,6 @@ const MainContent = () => {
     setIsDragActive(false);
   };
 
-  const formatToKB = (file) => {
-    return Math.round(new Blob([file]).size / 1024);
-  };
   const handleDownload = () => {
     const downloadLink = document.createElement("a");
     downloadLink.href = compressedImage;
@@ -114,7 +117,7 @@ const MainContent = () => {
             <h3>Original Image:</h3>
             <img src={originalImage} alt="Original" width="300" />
             <p>File Name: {uploadedFileName}</p>
-            <p>File Size: {formatToKB(originalImage)} KB</p>
+            <p>File Size: {(originalFileSize / 1024).toFixed(2)} KB</p>
           </div>
         )}
         {compressedImage && (
@@ -122,11 +125,17 @@ const MainContent = () => {
             <h3>Compressed Image:</h3>
             <img src={compressedImage} alt="Compressed" width="300" />
             <p>Compressed File Name: compressed_{uploadedFileName}</p>
-            <p>File Size: {formatToKB(compressedImage)} KB</p>
+            <p>File Size: {(compressedFileSize / 1024).toFixed(2)} KB</p>
             <p>Compression Rate: {compressionRate}%</p>
             <button onClick={handleDownload}>Download Compressed Image</button>
           </div>
         )}
+      </div>
+      <div>
+        <ImgComparisonSlider>
+          <img slot="first" src={originalImage} width="100%" />
+          <img slot="second" src={compressedImage} width="100%" />
+        </ImgComparisonSlider>
       </div>
     </div>
   );

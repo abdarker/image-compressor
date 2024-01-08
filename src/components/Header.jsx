@@ -1,7 +1,7 @@
 const Header = () => {
   return (
-    <header className="sticky top-0 z-50 w-full border-b ">
-      <div className="container flex h-14  items-center mx-auto px-4">
+    <header className="sticky top-0  w-full border-b ">
+      <div className="container flex h-14 items-center mx-auto px-4">
         <div className="mr-4">
           <a className="mr-6 flex items-center space-x-2" href="/">
             <svg
