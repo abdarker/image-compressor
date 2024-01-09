@@ -1,15 +1,17 @@
-import React from "react";
-
 const Intro = () => {
   return (
     <section className="mx-auto flex max-w-[980px] flex-col items-center gap-2 py-6 md:py-12 lg:py-18">
       <h1 className="text-center text-3xl font-bold leading-tight tracking-tighter md:text-6xl lg:leading-[1.1]">
         Free and Open Source Image Compressor
       </h1>
-      <span className="max-w-[750px] text-center text-lg text-muted-foreground sm:text-xl">
-       Optimizes images locally, delivering unmatched
-        efficiency without storing a single file. Experience lightning-fast
-        compression, all in one place.
+      <span className="max-w-[750px] text-center text-lg  sm:text-xl">
+        Optimizes images{" "}
+        <span className="font-semibold underline">locally</span> , delivering
+        unmatched efficiency{" "}
+        <span className="font-semibold underline">
+          without storing a single file.
+        </span>{" "}
+        Experience lightning-fast compression, all in one place.
       </span>
 
       <div className="flex w-full items-center justify-center space-x-4 pt-4 ">

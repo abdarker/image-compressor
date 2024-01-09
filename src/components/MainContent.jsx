@@ -88,15 +88,44 @@ const MainContent = () => {
     <div className="container  mx-auto px-4">
       <Intro />
       <div className="">
-        <div
-          className={`flex justify-center items-center  h-40 border-2 border-dashed rounded-lg 
-        ${isDragActive ? "bg-gray-100 border-black" : "border-gray-300"}`}
+        <label
+          className={`flex justify-center items-center cursor-pointer h-40 border-2 border-dashed rounded-lg 
+        ${isDragActive ? "bg-gray-100 border-gray-700" : "border-gray-300"}`}
           onDrop={handleImageDrop}
           onDragOver={handleDragOver}
           onDragEnter={handleDragEnter}
           onDragLeave={handleDragLeave}
+          htmlFor="file-input"
         >
           {/* Your drop area content */}
+          <div className="flex flex-col items-center justify-center pt-5 pb-6">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className={`w-9 h-9 mb-2 ${
+                isDragActive ? "text-gray-700" : "text-gray-500"
+              } `}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
+              />
+            </svg>
+
+            <p
+              className={`mb-2 text-lg  ${
+                isDragActive ? "text-gray-700" : "text-gray-500"
+              } `}
+            >
+              <span className="font-semibold">Click to upload</span> or drag and
+              drop
+            </p>
+            <p className=" text-gray-500 ">jpg, jpeg, png, webp</p>
+          </div>
 
           <input
             multiple
@@ -106,16 +135,8 @@ const MainContent = () => {
             style={{ display: "none" }}
             id="file-input"
           />
+        </label>
 
-          <label
-            htmlFor="file-input"
-            className={`text-lg cursor-pointer ${
-              isDragActive ? "text-sky-800" : "text-gray-400"
-            }`}
-          >
-            Click or drag file to this area to upload
-          </label>
-        </div>
         {/* Display compressed images */}
         <div>
           {compressedImages?.map((image, index) => (
