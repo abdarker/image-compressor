@@ -9,7 +9,6 @@ function App() {
       <main className="flex-1">
         <MainContent />
       </main>
-
       <Footer />
     </div>
   );
