@@ -2,6 +2,7 @@ import { ImgComparisonSlider } from "@img-comparison-slider/react";
 import Compressor from "compressorjs";
 import JSZip from "jszip";
 import React, { useState } from "react";
+import ImageInfoCard from "./ImageInfoCard";
 import Intro from "./Intro";
 
 const MainContent = () => {
@@ -89,7 +90,7 @@ const MainContent = () => {
       <Intro />
       <div className="">
         <label
-          className={`flex justify-center items-center cursor-pointer h-40 border-2 border-dashed rounded-lg 
+          className={`flex justify-center items-center cursor-pointer h-40 border-2 border-dashed rounded-lg
         ${isDragActive ? "bg-gray-100 border-gray-700" : "border-gray-300"}`}
           onDrop={handleImageDrop}
           onDragOver={handleDragOver}
@@ -145,6 +146,13 @@ const MainContent = () => {
             </div>
           ))}
         </div>
+        <div className="grid grid-cols-2 gap-4">
+          {" "}
+          <ImageInfoCard />
+          <ImageInfoCard />
+          <ImageInfoCard />
+        </div>
+
         {/* Button to download the zip file */}
         <div>
           <button onClick={handleDownload}>
