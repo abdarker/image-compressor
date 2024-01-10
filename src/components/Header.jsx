@@ -21,7 +21,7 @@ const Header = () => {
               <path d="M3.124 10.5c.16 -.95 .468 -1.85 .9 -2.675l.169 -.305" />
               <path d="M6.907 4.579a8.954 8.954 0 0 1 3.093 -1.356" />
             </svg>
-            <span className=" font-bold sm:inline-block">image compressor</span>
+            <span className="font-bold sm:inline-block mt-1">image compressor</span>
           </a>
           <nav className="flex items-center gap-6 text-sm">
             {/* Navigation links */}
