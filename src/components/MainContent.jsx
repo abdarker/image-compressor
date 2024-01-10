@@ -9,7 +9,6 @@ const MainContent = () => {
   const [compressedImages, setCompressedImages] = useState([]);
   const [zipFile, setZipFile] = useState(null);
   const [isDragActive, setIsDragActive] = useState(false);
-
   const handleImageDrop = async (e) => {
     e.preventDefault();
     setIsDragActive(false);
@@ -29,7 +28,20 @@ const MainContent = () => {
     const img = zip.folder("compressed_images");
     for (const file of files) {
       const compressedImg = await compressImage(file);
-      compressedImgs.push(compressedImg);
+      //   compressedImgs.push(compressedImg);
+      const base64Data = compressedImg.split(",")[1];
+      const binaryData = atob(base64Data);
+      // Get the length of the binary data
+      const compressedDataSize = binaryData.length;
+      const rate = ((file.size - compressedDataSize) / file.size) * 100;
+      compressedImgs.push({
+        fileName: "compressed_" + file.name,
+        originalSize: file.size,
+        compressedSize: compressedDataSize,
+        fileType: file.type,
+        content: compressedImg,
+        compressRate: rate.toFixed(2),
+      });
       const response = await fetch(compressedImg);
       const blob = await response.blob();
       img.file(`compressed_${file.name}`, blob);
@@ -139,18 +151,11 @@ const MainContent = () => {
         </label>
 
         {/* Display compressed images */}
-        <div>
-          {compressedImages?.map((image, index) => (
-            <div key={index}>
-              <img src={image} alt={`Compressed-${index}`} width="300" />
-            </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 py-4">
+          {compressedImages?.map((image, i) => (
+            <ImageInfoCard key={i} {...image} />
           ))}
-        </div>
-        <div className="grid grid-cols-2 gap-4">
-          {" "}
-          <ImageInfoCard />
-          <ImageInfoCard />
-          <ImageInfoCard />
         </div>
 
         {/* Button to download the zip file */}
