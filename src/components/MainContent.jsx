@@ -4,11 +4,14 @@ import JSZip from "jszip";
 import React, { useState } from "react";
 import ImageInfoCard from "./ImageInfoCard";
 import Intro from "./Intro";
+import LoadingSpinner from "./LoadingSpinner";
 
 const MainContent = () => {
   const [compressedImages, setCompressedImages] = useState([]);
   const [zipFile, setZipFile] = useState(null);
   const [isDragActive, setIsDragActive] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const handleImageDrop = async (e) => {
     e.preventDefault();
     setIsDragActive(false);
@@ -23,6 +26,7 @@ const MainContent = () => {
   };
 
   const handleImages = async (files) => {
+    setLoading(true);
     const compressedImgs = [];
     const zip = new JSZip();
     const img = zip.folder("compressed_images");
@@ -49,6 +53,7 @@ const MainContent = () => {
     const zipBlob = await zip.generateAsync({ type: "blob" });
     setZipFile(zipBlob);
     setCompressedImages(compressedImgs);
+    setLoading(false);
   };
 
   const compressImage = (file) => {
@@ -149,40 +154,45 @@ const MainContent = () => {
             id="file-input"
           />
         </label>
-
-        {/* Display compressed images */}
-        {compressedImages?.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 py-4">
-            {compressedImages?.map((image, i) => (
-              <ImageInfoCard key={i} {...image} />
-            ))}
+        {loading ? (
+          <div className="flex items-center justify-center py-2">
+            <LoadingSpinner />
           </div>
-        )}
+        ) : (
+          <>
+            {compressedImages?.length > 0 && (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 py-4">
+                {compressedImages?.map((image, i) => (
+                  <ImageInfoCard key={i} {...image} />
+                ))}
+              </div>
+            )}
 
-        {/* Button to download the zip file */}
-        {compressedImages?.length > 0 && (
-          <div>
-            <button
-              class="inline-flex items-center px-3 py-1 bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm font-medium rounded-md"
-              onClick={handleDownload}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                className="mr-1 size-4"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                <polyline points="7 10 12 15 17 10"></polyline>
-                <line x1="12" y1="15" x2="12" y2="3"></line>
-              </svg>
-              <span className="mt-1">Download All Images (ZIP)</span>
-            </button>
-          </div>
+            {compressedImages?.length > 0 && (
+              <div>
+                <button
+                  class="inline-flex items-center px-3 py-1 bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm font-medium rounded-md"
+                  onClick={handleDownload}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    className="mr-1 size-4"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                  </svg>
+                  <span className="mt-1">Download All Images (ZIP)</span>
+                </button>
+              </div>
+            )}
+          </>
         )}
 
         {/* Image comparison slider */}
