@@ -14,7 +14,7 @@ const Intro = () => {
         Experience lightning-fast compression, all in one place.
       </span>
 
-      <div className="flex w-full items-center justify-center space-x-4 pt-4 ">
+      <div className="flex w-full items-center justify-center space-x-4 pt-2 ">
         <a
           target="_blank"
           rel="noreferrer"

@@ -6,19 +6,19 @@ const ImageInfoCard = ({ ...props }) => {
       <img
         src={props?.content}
         alt={props?.fileName}
-        className="size-20 object-cover rounded-lg"
+        className="size-24 object-cover rounded-lg"
       />
 
       <div className="flex-1 px-2 py-1">
         <h1 className="line-clamp-1 font-semibold ">{props?.fileName}</h1>
         <p className="text-sm text-gray-500">
-          Original File Size:{" "}
+          Original Size:{" "}
           <span className="text-red-500">
             {(props?.originalSize / 1024).toFixed(2)}KB
           </span>
         </p>
         <p className="text-sm text-gray-500">
-          Compressed File Size: {""}
+          Compressed Size: {""}
           <span className=" text-green-500 ">
             {(props?.compressedSize / 1024).toFixed(2)}KB{" "}
             <span className="inline-flex">
@@ -37,7 +37,7 @@ const ImageInfoCard = ({ ...props }) => {
                   d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3"
                 />
               </svg>
-              {props?.compressRate}% off )
+              {props?.compressRate}%)
             </span>
           </span>
         </p>

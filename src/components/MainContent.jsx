@@ -35,7 +35,7 @@ const MainContent = () => {
       const compressedDataSize = binaryData.length;
       const rate = ((file.size - compressedDataSize) / file.size) * 100;
       compressedImgs.push({
-        fileName: "compressed_" + file.name,
+        fileName: "compressed_" + file.name.substring(0, 16),
         originalSize: file.size,
         compressedSize: compressedDataSize,
         fileType: file.type,
@@ -102,7 +102,7 @@ const MainContent = () => {
       <Intro />
       <div className="">
         <label
-          className={`flex justify-center items-center cursor-pointer h-40 border-2 border-dashed rounded-lg
+          className={`flex justify-center items-center cursor-pointer h-30 md:40 border-2 border-dashed rounded-lg
         ${isDragActive ? "bg-gray-100 border-gray-700" : "border-gray-300"}`}
           onDrop={handleImageDrop}
           onDragOver={handleDragOver}
@@ -111,14 +111,14 @@ const MainContent = () => {
           htmlFor="file-input"
         >
           {/* Your drop area content */}
-          <div className="flex flex-col items-center justify-center pt-5 pb-6">
+          <div className="flex flex-col items-center justify-center py-5">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className={`w-9 h-9 mb-2 ${
+              className={`w-9 h-9 md:mb-2 ${
                 isDragActive ? "text-gray-700" : "text-gray-500"
               } `}
             >
@@ -130,7 +130,7 @@ const MainContent = () => {
             </svg>
 
             <p
-              className={`mb-2 text-lg  ${
+              className={`md:mb-2 md:text-lg  ${
                 isDragActive ? "text-gray-700" : "text-gray-500"
               } `}
             >
@@ -151,12 +151,13 @@ const MainContent = () => {
         </label>
 
         {/* Display compressed images */}
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 py-4">
-          {compressedImages?.map((image, i) => (
-            <ImageInfoCard key={i} {...image} />
-          ))}
-        </div>
+        {compressedImages?.length > 0 && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 py-4">
+            {compressedImages?.map((image, i) => (
+              <ImageInfoCard key={i} {...image} />
+            ))}
+          </div>
+        )}
 
         {/* Button to download the zip file */}
         <div>
