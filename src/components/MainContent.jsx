@@ -5,6 +5,7 @@ import { PhotoProvider } from "react-photo-view";
 import ImageInfoCard from "./ImageInfoCard";
 import Intro from "./Intro";
 import LoadingSpinner from "./LoadingSpinner";
+import QualitySlider from "./QualitySlider";
 
 const MainContent = () => {
   const [compressedImages, setCompressedImages] = useState([]);
@@ -105,6 +106,7 @@ const MainContent = () => {
   return (
     <div className="container  mx-auto px-4">
       <Intro />
+      <QualitySlider />
       <div className="">
         <label
           className={`flex justify-center items-center cursor-pointer h-30 md:40 border-2 border-dashed rounded-lg
