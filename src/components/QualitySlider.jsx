@@ -11,11 +11,11 @@ const QualitySlider = () => {
   return (
     <div>
       <h2>Single Slider Example</h2>
-      <label htmlFor="slider">Value: {value}</label>
+      <label>Value: {value}</label>
       <br />
       <input
         type="range"
-        id="slider"
+        className="w-full h-1 mb-6 bg-gray-200 rounded-lg appearance-none cursor-pointer range-sm "
         value={value}
         min={10}
         max={90}
