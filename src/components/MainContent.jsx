@@ -171,7 +171,7 @@ const MainContent = () => {
             {compressedImages?.length > 0 && (
               <div>
                 <button
-                  class="inline-flex items-center px-3 py-1 bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm font-medium rounded-md"
+                  className="inline-flex items-center px-3 py-1 bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm font-medium rounded-md"
                   onClick={handleDownload}
                 >
                   <svg
