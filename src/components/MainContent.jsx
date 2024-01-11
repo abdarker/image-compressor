@@ -1,6 +1,7 @@
 import Compressor from "compressorjs";
 import JSZip from "jszip";
 import React, { useState } from "react";
+import { PhotoProvider } from "react-photo-view";
 import ImageInfoCard from "./ImageInfoCard";
 import Intro from "./Intro";
 import LoadingSpinner from "./LoadingSpinner";
@@ -159,13 +160,15 @@ const MainContent = () => {
           </div>
         ) : (
           <>
-            {compressedImages?.length > 0 && (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 py-4">
-                {compressedImages?.map((image, i) => (
-                  <ImageInfoCard key={i} {...image} />
-                ))}
-              </div>
-            )}
+            <PhotoProvider>
+              {compressedImages?.length > 0 && (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 py-4">
+                  {compressedImages?.map((image, i) => (
+                    <ImageInfoCard key={i} {...image} />
+                  ))}
+                </div>
+              )}
+            </PhotoProvider>
 
             {compressedImages?.length > 0 && (
               <div>

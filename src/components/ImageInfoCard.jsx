@@ -1,19 +1,19 @@
 import React from "react";
-
+import { PhotoView } from "react-photo-view";
+import "react-photo-view/dist/react-photo-view.css";
 const ImageInfoCard = ({ ...props }) => {
   return (
     <div className=" flex bg-white  rounded-lg shadow hover:shadow-md overflow-hidden group">
       <div className="relative inline-block cursor-pointer">
-        <img
-          src={props?.content}
-          alt={props?.fileName}
-          className="size-24 object-cover rounded-lg"
-        />
+        <PhotoView src={props?.content}>
+          <img
+            src={props?.content}
+            alt={props?.fileName}
+            className="size-24 object-cover rounded-lg"
+          />
+        </PhotoView>
         <div>
-          <button
-            onClick={() => {}}
-            className="absolute inset-0 flex items-center justify-center bg-gray-100 bg-opacity-50 invisible group-hover:visible"
-          >
+          <span className="absolute inset-0 flex items-center justify-center bg-gray-100 bg-opacity-50 invisible group-hover:visible">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -33,7 +33,7 @@ const ImageInfoCard = ({ ...props }) => {
                 d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
               />
             </svg>
-          </button>
+          </span>
         </div>
       </div>
 
