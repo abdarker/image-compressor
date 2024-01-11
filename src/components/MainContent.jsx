@@ -1,4 +1,3 @@
-import { ImgComparisonSlider } from "@img-comparison-slider/react";
 import Compressor from "compressorjs";
 import JSZip from "jszip";
 import React, { useState } from "react";
@@ -194,13 +193,6 @@ const MainContent = () => {
             )}
           </>
         )}
-
-        {/* Image comparison slider */}
-        <div>
-          <ImgComparisonSlider>
-            {/* You can add your original and compressed images here */}
-          </ImgComparisonSlider>
-        </div>
       </div>
     </div>
   );

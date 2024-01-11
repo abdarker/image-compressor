@@ -10,7 +10,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@img-comparison-slider/react": "^8.0.1",
     "compressorjs": "^1.2.1",
     "jszip": "^3.10.1",
     "react": "^18.2.0",
