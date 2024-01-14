@@ -14,7 +14,7 @@ const MainContent = () => {
   const [loading, setLoading] = useState(false);
   const [value, setValue] = useState(80); // Initial value
 
-  const handleRangeChange = (event) => {
+  const handleRangeChange = async (event) => {
     setValue(parseInt(event.target.value, 10));
   };
 
