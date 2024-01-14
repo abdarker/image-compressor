@@ -3,7 +3,7 @@ import { PhotoView } from "react-photo-view";
 import "react-photo-view/dist/react-photo-view.css";
 const ImageInfoCard = ({ ...props }) => {
   return (
-    <div className=" flex bg-white  rounded-lg shadow hover:shadow-md overflow-hidden group">
+    <div className="flex bg-white rounded-lg shadow hover:shadow-md overflow-hidden group">
       <div className="relative inline-block cursor-pointer">
         <PhotoView src={props?.content}>
           <div>
@@ -38,7 +38,7 @@ const ImageInfoCard = ({ ...props }) => {
       </div>
 
       <div className="flex-1 px-2 py-1">
-        <h1 className="line-clamp-1 font-semibold ">{props?.fileName}</h1>
+        <h1 className="line-clamp-1 font-semibold">{props?.fileName}</h1>
         <p className="text-sm text-gray-500">
           Original Size:{" "}
           <span className="text-red-500">
@@ -47,7 +47,7 @@ const ImageInfoCard = ({ ...props }) => {
         </p>
         <p className="text-sm text-gray-500">
           Compressed Size: {""}
-          <span className=" text-green-500 ">
+          <span className="text-green-500">
             {(props?.compressedSize / 1024).toFixed(2)}KB{" "}
             <span className="inline-flex">
               (

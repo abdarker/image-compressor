@@ -114,7 +114,7 @@ const MainContent = () => {
   };
 
   return (
-    <div className="container  mx-auto px-4">
+    <div className="container mx-auto px-4">
       <Intro />
       <QualitySlider
         value={value}
@@ -158,7 +158,7 @@ const MainContent = () => {
               <span className="font-semibold">Click to upload</span> or drag and
               drop
             </p>
-            <p className=" text-gray-500 ">jpg, jpeg, png, webp</p>
+            <p className="text-gray-500">jpg, jpeg, png, webp</p>
           </div>
 
           <input
