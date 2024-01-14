@@ -11,3 +11,27 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.range::-webkit-slider-thumb {
+  -webkit-appearance: none !important;
+  border-radius: 100%;
+  background-color: black;
+  height: 16px;
+  width: 16px;
+  cursor: pointer;
+}
+.range::-ms-thumb {
+  border-radius: 100%;
+  background-color: black;
+  height: 18px;
+  width: 18px;
+  border: none;
+}
+.range::-moz-range-thumb {
+  border-radius: 20px;
+  height: 16px;
+  width: 16px;
+  border: none;
+  background: none;
+  background-color: black;
+}

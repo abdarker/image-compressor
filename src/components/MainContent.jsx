@@ -12,6 +12,11 @@ const MainContent = () => {
   const [zipFile, setZipFile] = useState(null);
   const [isDragActive, setIsDragActive] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [value, setValue] = useState(80); // Initial value
+
+  const handleRangeChange = (event) => {
+    setValue(parseInt(event.target.value, 10));
+  };
 
   const handleImageDrop = async (e) => {
     e.preventDefault();
@@ -66,7 +71,7 @@ const MainContent = () => {
         minHeight: 0,
         width: undefined,
         height: undefined,
-        quality: 0.8,
+        quality: value / 100,
 
         success(result) {
           const reader = new FileReader();
@@ -106,7 +111,11 @@ const MainContent = () => {
   return (
     <div className="container  mx-auto px-4">
       <Intro />
-      <QualitySlider />
+      <QualitySlider
+        value={value}
+        handleRangeChange={handleRangeChange}
+        setValue={setValue}
+      />
       <div className="">
         <label
           className={`flex justify-center items-center cursor-pointer h-30 md:40 border-2 border-dashed rounded-lg
