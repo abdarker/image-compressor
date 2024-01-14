@@ -1,6 +1,6 @@
 import Compressor from "compressorjs";
 import JSZip from "jszip";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { PhotoProvider } from "react-photo-view";
 import ImageInfoCard from "./ImageInfoCard";
 import Intro from "./Intro";
@@ -13,6 +13,7 @@ const MainContent = () => {
   const [isDragActive, setIsDragActive] = useState(false);
   const [loading, setLoading] = useState(false);
   const [value, setValue] = useState(80); // Initial value
+  const [filelist, setFilelist] = useState([]);
 
   const handleRangeChange = async (event) => {
     setValue(parseInt(event.target.value, 10));
@@ -21,15 +22,19 @@ const MainContent = () => {
   const handleImageDrop = async (e) => {
     e.preventDefault();
     setIsDragActive(false);
-    const files = Array.from(e.dataTransfer.files);
-    await handleImages(files);
+    setFilelist(e.dataTransfer.files);
   };
 
   const handleImageUpload = async (e) => {
     e.preventDefault();
-    const files = Array.from(e.target.files);
-    await handleImages(files);
+    setFilelist(e.target.files);
   };
+
+  useEffect(() => {
+    if (filelist.length > 0) {
+      handleImages(filelist);
+    }
+  }, [value, filelist]);
 
   const handleImages = async (files) => {
     setLoading(true);
