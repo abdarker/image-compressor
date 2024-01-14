@@ -45,7 +45,7 @@ const MainContent = () => {
       const compressedDataSize = binaryData.length;
       const rate = ((file.size - compressedDataSize) / file.size) * 100;
       compressedImgs.push({
-        fileName: "compressed_" + file.name.substring(0, 16),
+        fileName: "compressed_" + file.name.substring(0, 10) + "...",
         originalSize: file.size,
         compressedSize: compressedDataSize,
         fileType: file.type,

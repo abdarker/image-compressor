@@ -3,7 +3,7 @@ import React from "react";
 const QualitySlider = ({ value, setValue, handleRangeChange }) => {
   return (
     <div>
-      <label className="text-lg font-semibold">
+      <label className="md:text-lg md:font-semibold font-medium">
         Image Quality: {value / 100}{" "}
         {value / 100 == 0 ? (
           <span className="text-red-500">(Not Recommended)</span>
