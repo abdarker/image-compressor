@@ -4,7 +4,7 @@
 Free and Open Source Image Compressor. Optimizes images ``locally``, delivering unmatched efficiency ``without storing a single file``. Experience lightning-fast compression, all in one place.
 ## Live
 
-Demo
+https://image-compressor.github.io
 
 
 ## Getting Started
