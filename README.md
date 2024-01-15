@@ -36,6 +36,7 @@ Contributions are always welcome!
 ## Authors
 
 - [@abdarker](https://www.github.com/abdarker)
+- [@image-compressor](https://www.github.com/image-compressor)
 
 
 ## License
