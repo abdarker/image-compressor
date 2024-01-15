@@ -72,7 +72,7 @@ const ImageInfoCard = ({ handleSingleDownload, ...props }) => {
         </p>
         <button
           onClick={() => handleSingleDownload(props?.content)}
-          className="rounded-lg bg-[#0fdd23] text-white px-2  inline-flex items-center"
+          className="rounded-md bg-[#0ecd0f] hover:bg-[#0ecd0f]/80 text-white px-2  inline-flex items-center"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

@@ -48,9 +48,11 @@ const MainContent = () => {
       const binaryData = atob(base64Data);
       // Get the length of the binary data
       const compressedDataSize = binaryData.length;
-      const rate = ((file.size - compressedDataSize) / file.size) * 100;
+      const rate = ((file?.size - compressedDataSize) / file.size) * 100;
+      let dotIndex = file?.name?.lastIndexOf(".");
       compressedImgs.push({
-        fileName: "compressed_" + file.name.substring(0, 10) + "...",
+        fileName:
+          "compressed_" + file?.name?.slice(0, 8) + file?.name?.slice(dotIndex),
         originalSize: file.size,
         compressedSize: compressedDataSize,
         fileType: file.type,
