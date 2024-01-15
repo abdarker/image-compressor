@@ -5,6 +5,7 @@ import { PhotoProvider } from "react-photo-view";
 import ImageInfoCard from "./ImageInfoCard";
 import Intro from "./Intro";
 import LoadingSpinner from "./LoadingSpinner";
+import ProgressBar from "./ProgressBar";
 import QualitySlider from "./QualitySlider";
 
 const MainContent = () => {
@@ -14,6 +15,7 @@ const MainContent = () => {
   const [loading, setLoading] = useState(false);
   const [value, setValue] = useState(60); // Initial value
   const [filelist, setFilelist] = useState([]);
+  const [compressProgress, setCompressProgress] = useState(0);
 
   const handleRangeChange = async (event) => {
     setValue(parseInt(event.target.value, 10));
@@ -41,6 +43,7 @@ const MainContent = () => {
     const compressedImgs = [];
     const zip = new JSZip();
     const img = zip.folder("compressed_images");
+    let counter = files?.length;
     for (const file of files) {
       const compressedImg = await compressImage(file);
       //   compressedImgs.push(compressedImg);
@@ -61,8 +64,14 @@ const MainContent = () => {
       });
       const response = await fetch(compressedImg);
       const blob = await response.blob();
-      img.file(`compressed_${file.name}`, blob);
+      img.file(`compressed_${file?.name}`, blob);
+      counter = counter - 1;
+      const progress = Math.floor(
+        ((files?.length - counter) / files?.length) * 100
+      );
+      setCompressProgress(progress);
     }
+
     const zipBlob = await zip.generateAsync({ type: "blob" });
     setZipFile(zipBlob);
     setCompressedImages(compressedImgs);
@@ -79,7 +88,8 @@ const MainContent = () => {
         width: undefined,
         height: undefined,
         quality: value / 100,
-
+        convertSize: 300000,
+        convertTypes: ["image/png"],
         success(result) {
           const reader = new FileReader();
           reader.readAsDataURL(result);
@@ -234,6 +244,11 @@ const MainContent = () => {
             </button>
           )}
         </div>
+        {compressProgress > 0 && (
+          <div className="pt-2">
+            <ProgressBar width={compressProgress} />
+          </div>
+        )}
 
         {loading ? (
           <div className="flex items-center justify-center py-2">

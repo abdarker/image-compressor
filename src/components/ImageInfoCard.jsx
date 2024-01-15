@@ -42,7 +42,7 @@ const ImageInfoCard = ({ handleSingleDownload, ...props }) => {
         <h1 className="line-clamp-1 text-base md:text-lg font-semibold">
           {props?.fileName}
         </h1>
-        <span className="text-sm text-gray-500 flex items-center">
+        <span className="text-xs md:text-sm text-gray-500 flex items-center">
           <span className="text-[#ff4d4f]">
             {formatFileSize(props?.originalSize)}
           </span>
