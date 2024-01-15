@@ -11,7 +11,7 @@ const ImageInfoCard = ({ handleSingleDownload, ...props }) => {
             <img
               src={props?.content}
               alt={props?.fileName}
-              className="size-[105px] object-cover rounded-lg"
+              className="size-[100px] object-cover rounded-lg"
             />
             <div className="absolute inset-0 flex items-center justify-center rounded-lg bg-black/25 invisible group-hover:visible">
               <svg
@@ -39,40 +39,34 @@ const ImageInfoCard = ({ handleSingleDownload, ...props }) => {
       </div>
 
       <div className="flex-1 px-2 py-1">
-        <h1 className="line-clamp-1 font-semibold">{props?.fileName}</h1>
-        <p className="text-sm text-gray-500">
-          Original:{" "}
+        <h1 className="line-clamp-1 text-base md:text-lg font-semibold">
+          {props?.fileName}
+        </h1>
+        <span className="text-sm text-gray-500 flex items-center">
           <span className="text-[#ff4d4f]">
             {formatFileSize(props?.originalSize)}
           </span>
-        </p>
-        <p className="text-sm text-gray-500">
-          Compressed: {""}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            className="w-[18px] h-4 mb-[3px] text-black"
+          >
+            <path
+              fillRule="evenodd"
+              d="M2 10a.75.75 0 0 1 .75-.75h12.59l-2.1-1.95a.75.75 0 1 1 1.02-1.1l3.5 3.25a.75.75 0 0 1 0 1.1l-3.5 3.25a.75.75 0 1 1-1.02-1.1l2.1-1.95H2.75A.75.75 0 0 1 2 10Z"
+              clipRule="evenodd"
+            />
+          </svg>
+
           <span className="text-[#0fdd23]">
             {formatFileSize(props?.compressedSize)}{" "}
-            <span className="inline-flex">
-              (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-3.5 h-3.5 mr-0.5"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3"
-                />
-              </svg>
-              {props?.compressRate}%)
-            </span>
+            <span className="inline-flex">({props?.compressRate}%)</span>
           </span>
-        </p>
+        </span>
         <button
           onClick={() => handleSingleDownload(props?.content)}
-          className="rounded-md bg-[#0ecd0f] hover:bg-[#0ecd0f]/80 text-white px-2  inline-flex items-center"
+          className="rounded-md bg-[#0ecd0f] hover:bg-[#0ecd0f]/80 text-white px-2  inline-flex items-center mt-2"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
