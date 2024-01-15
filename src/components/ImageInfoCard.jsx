@@ -1,6 +1,7 @@
 import React from "react";
 import { PhotoView } from "react-photo-view";
 import "react-photo-view/dist/react-photo-view.css";
+import { formatFileSize } from "../../util/util";
 const ImageInfoCard = ({ ...props }) => {
   return (
     <div className="flex bg-white rounded-lg shadow hover:shadow-md overflow-hidden group">
@@ -42,13 +43,13 @@ const ImageInfoCard = ({ ...props }) => {
         <p className="text-sm text-gray-500">
           Original Size:{" "}
           <span className="text-[#ff4d4f]">
-            {(props?.originalSize / 1024).toFixed(2)}KB
+            {formatFileSize(props?.originalSize)}
           </span>
         </p>
         <p className="text-sm text-gray-500">
           Compressed Size: {""}
           <span className="text-[#0fdd23]">
-            {(props?.compressedSize / 1024).toFixed(2)}KB{" "}
+            {formatFileSize(props?.compressedSize)}{" "}
             <span className="inline-flex">
               (
               <svg
