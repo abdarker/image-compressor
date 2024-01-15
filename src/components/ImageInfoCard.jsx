@@ -2,7 +2,7 @@ import React from "react";
 import { PhotoView } from "react-photo-view";
 import "react-photo-view/dist/react-photo-view.css";
 import { formatFileSize } from "../../util/util";
-const ImageInfoCard = ({ ...props }) => {
+const ImageInfoCard = ({ handleSingleDownload, ...props }) => {
   return (
     <div className="flex bg-white rounded-lg shadow hover:shadow-md overflow-hidden group">
       <div className="relative inline-block cursor-pointer">
@@ -11,7 +11,7 @@ const ImageInfoCard = ({ ...props }) => {
             <img
               src={props?.content}
               alt={props?.fileName}
-              className="size-24 object-cover rounded-lg"
+              className="size-[105px] object-cover rounded-lg"
             />
             <div className="absolute inset-0 flex items-center justify-center rounded-lg bg-black/25 invisible group-hover:visible">
               <svg
@@ -70,6 +70,26 @@ const ImageInfoCard = ({ ...props }) => {
             </span>
           </span>
         </p>
+        <button
+          onClick={() => handleSingleDownload(props?.content)}
+          className="rounded-lg bg-[#0fdd23] text-white px-2  inline-flex items-center"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            className="mr-1 size-[14px]"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          <span className="text-sm mt-1">Download</span>
+        </button>
       </div>
     </div>
   );

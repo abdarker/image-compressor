@@ -113,6 +113,15 @@ const MainContent = () => {
     }
   };
 
+  const handleSingleDownload = (file) => {
+    const downloadLink = document.createElement("a");
+    downloadLink.href = file;
+    downloadLink.download = "compressed_image.jpg"; // Custom file name here
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+  };
+
   return (
     <div className="container mx-auto px-4">
       <Intro />
@@ -234,7 +243,11 @@ const MainContent = () => {
               {compressedImages?.length > 0 && (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 py-4">
                   {compressedImages?.map((image, i) => (
-                    <ImageInfoCard key={i} {...image} />
+                    <ImageInfoCard
+                      key={i}
+                      handleSingleDownload={handleSingleDownload}
+                      {...image}
+                    />
                   ))}
                 </div>
               )}
