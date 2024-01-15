@@ -10,7 +10,7 @@ const QualitySlider = ({ value, setValue, handleRangeChange }) => {
         ) : value / 100 == 0.2 || value / 100 == 0.4 ? (
           <span className="text-[#fadb14]">(Modarate)</span>
         ) : value / 100 == 0.6 || value / 100 == 0.8 ? (
-          <span className="text-[#1af02f]">(Recommended)</span>
+          <span className="text-[#0fdd23]">(Recommended)</span>
         ) : (
           <span className="text-[#ff4d4f]">(Not Recommended)</span>
         )}
@@ -34,10 +34,10 @@ const QualitySlider = ({ value, setValue, handleRangeChange }) => {
         <span className="text-sm text-[#fadb14] absolute start-[40.0%] -translate-x-1/2 -bottom-5">
           0.4
         </span>
-        <span className="text-sm text-[#1af02f] absolute start-[60%] -translate-x-1/2 -bottom-5">
+        <span className="text-sm text-[#0fdd23] absolute start-[60%] -translate-x-1/2 -bottom-5">
           0.6
         </span>
-        <span className="text-sm text-[#1af02f] absolute start-[80%] -translate-x-1/2 -bottom-5">
+        <span className="text-sm text-[#0fdd23] absolute start-[80%] -translate-x-1/2 -bottom-5">
           0.8
         </span>
         <span className="text-sm text-[#ff4d4f] absolute end-0 -bottom-5">

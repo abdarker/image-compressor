@@ -12,7 +12,7 @@ const ImageInfoCard = ({ ...props }) => {
               alt={props?.fileName}
               className="size-24 object-cover rounded-lg"
             />
-            <div className="absolute inset-0 flex items-center justify-center rounded-lg bg-black/20 invisible group-hover:visible">
+            <div className="absolute inset-0 flex items-center justify-center rounded-lg bg-black/25 invisible group-hover:visible">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -47,7 +47,7 @@ const ImageInfoCard = ({ ...props }) => {
         </p>
         <p className="text-sm text-gray-500">
           Compressed Size: {""}
-          <span className="text-[#1af02f]">
+          <span className="text-[#0fdd23]">
             {(props?.compressedSize / 1024).toFixed(2)}KB{" "}
             <span className="inline-flex">
               (

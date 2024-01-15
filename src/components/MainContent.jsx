@@ -197,7 +197,7 @@ const MainContent = () => {
           )}
           {filelist?.length > 0 && (
             <button
-              className="inline-flex items-center px-3 py-1 bg-[#ff4d4f] hover:bg-[#ff4d4f]/90 text-white text-sm font-medium rounded-md"
+              className="inline-flex items-center px-3 py-1 bg-[#ff4d4f] hover:bg-[#ff4d4f]/85 text-white text-sm font-medium rounded-md"
               onClick={() => {
                 setValue(80);
                 setCompressedImages([]);
