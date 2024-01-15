@@ -4,7 +4,7 @@ import "react-photo-view/dist/react-photo-view.css";
 import { formatFileSize } from "../../util/util";
 const ImageInfoCard = ({ handleSingleDownload, ...props }) => {
   return (
-    <div className="flex bg-white rounded-lg shadow hover:shadow-md overflow-hidden group">
+    <div className="flex bg-white rounded-lg shadow hover:shadow-md overflow-hidden">
       <div className="relative inline-block cursor-pointer">
         <PhotoView src={props?.content}>
           <div>
@@ -13,7 +13,7 @@ const ImageInfoCard = ({ handleSingleDownload, ...props }) => {
               alt={props?.fileName}
               className="size-[100px] object-cover rounded-lg"
             />
-            <div className="absolute inset-0 flex items-center justify-center rounded-lg bg-black/25 invisible group-hover:visible">
+            <div className="absolute inset-0 flex items-center justify-center rounded-lg bg-black/25">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"

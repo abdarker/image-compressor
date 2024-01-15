@@ -12,7 +12,7 @@ const MainContent = () => {
   const [zipFile, setZipFile] = useState(null);
   const [isDragActive, setIsDragActive] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [value, setValue] = useState(80); // Initial value
+  const [value, setValue] = useState(60); // Initial value
   const [filelist, setFilelist] = useState([]);
 
   const handleRangeChange = async (event) => {
@@ -210,7 +210,7 @@ const MainContent = () => {
             <button
               className="inline-flex items-center px-3 py-1 bg-[#ff4d4f] hover:bg-[#ff4d4f]/85 text-white text-sm font-medium rounded-md"
               onClick={() => {
-                setValue(80);
+                setValue(60);
                 setCompressedImages([]);
                 setFilelist([]);
               }}
