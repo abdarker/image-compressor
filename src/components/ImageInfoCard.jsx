@@ -41,13 +41,13 @@ const ImageInfoCard = ({ ...props }) => {
       <div className="flex-1 px-2 py-1">
         <h1 className="line-clamp-1 font-semibold">{props?.fileName}</h1>
         <p className="text-sm text-gray-500">
-          Original Size:{" "}
+          Original:{" "}
           <span className="text-[#ff4d4f]">
             {formatFileSize(props?.originalSize)}
           </span>
         </p>
         <p className="text-sm text-gray-500">
-          Compressed Size: {""}
+          Compressed: {""}
           <span className="text-[#0fdd23]">
             {formatFileSize(props?.compressedSize)}{" "}
             <span className="inline-flex">
