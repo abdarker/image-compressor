@@ -174,7 +174,7 @@ const MainContent = () => {
           {compressedImages?.length > 0 && (
             <div className="mr-2">
               <button
-                className="inline-flex items-center px-3 py-1 bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm font-medium rounded-md"
+                className="inline-flex items-center px-3 py-1 bg-black hover:bg-black/80 text-white text-sm font-medium rounded-md"
                 onClick={handleDownload}
               >
                 <svg
@@ -197,7 +197,7 @@ const MainContent = () => {
           )}
           {filelist?.length > 0 && (
             <button
-              className="inline-flex items-center px-3 py-1 bg-red-500 hover:bg-red-600 text-white text-sm font-medium rounded-md"
+              className="inline-flex items-center px-3 py-1 bg-[#ff4d4f] hover:bg-[#ff4d4f]/90 text-white text-sm font-medium rounded-md"
               onClick={() => {
                 setValue(80);
                 setCompressedImages([]);

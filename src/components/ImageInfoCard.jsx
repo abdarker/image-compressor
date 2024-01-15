@@ -12,14 +12,14 @@ const ImageInfoCard = ({ ...props }) => {
               alt={props?.fileName}
               className="size-24 object-cover rounded-lg"
             />
-            <div className="absolute inset-0 flex items-center justify-center bg-gray-100 bg-opacity-50 invisible group-hover:visible">
+            <div className="absolute inset-0 flex items-center justify-center rounded-lg bg-black/20 invisible group-hover:visible">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                strokeWidth={1.5}
+                strokeWidth={2}
                 stroke="currentColor"
-                className="w-6 h-6 text-gray-500"
+                className="w-6 h-6 text-[#fafafa]"
               >
                 <path
                   strokeLinecap="round"
@@ -41,13 +41,13 @@ const ImageInfoCard = ({ ...props }) => {
         <h1 className="line-clamp-1 font-semibold">{props?.fileName}</h1>
         <p className="text-sm text-gray-500">
           Original Size:{" "}
-          <span className="text-red-500">
+          <span className="text-[#ff4d4f]">
             {(props?.originalSize / 1024).toFixed(2)}KB
           </span>
         </p>
         <p className="text-sm text-gray-500">
           Compressed Size: {""}
-          <span className="text-green-500">
+          <span className="text-[#1af02f]">
             {(props?.compressedSize / 1024).toFixed(2)}KB{" "}
             <span className="inline-flex">
               (
