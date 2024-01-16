@@ -221,6 +221,7 @@ const MainContent = () => {
               className="inline-flex items-center px-3 py-1 bg-[#ff4d4f] hover:bg-[#ff4d4f]/85 text-white text-sm font-medium rounded-md"
               onClick={() => {
                 setValue(60);
+                setCompressProgress(0)
                 setCompressedImages([]);
                 setFilelist([]);
               }}
