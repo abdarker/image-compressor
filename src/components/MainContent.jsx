@@ -88,7 +88,7 @@ const MainContent = () => {
         width: undefined,
         height: undefined,
         quality: value / 100,
-        convertSize: 300000,
+        convertSize: 120000,
         convertTypes: ["image/png"],
         success(result) {
           const reader = new FileReader();
@@ -128,7 +128,10 @@ const MainContent = () => {
   const handleSingleDownload = (file) => {
     const downloadLink = document.createElement("a");
     downloadLink.href = file;
-    downloadLink.download = "compressed_image.jpg"; // Custom file name here
+    var regexResult = /^data:(.+?)(?:;(?:.+?))?,/.exec(file);
+    var contentType = regexResult[1];
+    var extension = contentType.split("/")[1];
+    downloadLink.download = `compressed_image.${extension}`;
     document.body.appendChild(downloadLink);
     downloadLink.click();
     document.body.removeChild(downloadLink);
@@ -172,7 +175,7 @@ const MainContent = () => {
             </svg>
 
             <p
-              className={`md:mb-2 md:text-lg  ${
+              className={`md:text-lg  ${
                 isDragActive ? "text-gray-700" : "text-gray-500"
               } `}
             >
@@ -180,6 +183,9 @@ const MainContent = () => {
               drop
             </p>
             <p className="text-gray-500">jpg, jpeg, png, webp</p>
+            <p className="text-[#ff4d4f] text-sm">
+              **png image size needs to be &gt; 120Kb
+            </p>
           </div>
 
           <input
@@ -221,7 +227,7 @@ const MainContent = () => {
               className="inline-flex items-center px-3 py-1 bg-[#ff4d4f] hover:bg-[#ff4d4f]/85 text-white text-sm font-medium rounded-md"
               onClick={() => {
                 setValue(60);
-                setCompressProgress(0)
+                setCompressProgress(0);
                 setCompressedImages([]);
                 setFilelist([]);
               }}
